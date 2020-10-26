@@ -1,0 +1,64 @@
+import React from 'react';
+import { GhostSkeleton, useGSkeletonData } from './ghost-skeleton/ghostSkeleton';
+import { Icon } from './icons';
+import {Text} from './text';
+
+const styles = {
+    card: {
+      display: 'flex',
+      flexDirection: 'row',
+      marginTop: '2.5rem',
+  
+    },
+    main: {
+      marginLeft: '1rem',
+      flexGrow: 1
+    },
+    title: {
+      paddingTop: '0',
+      fontWeight: '700',
+    },
+    author: {
+      marginTop: '.3rem',
+      fontSize: '.8rem',
+    },
+    stars: {
+      marginTop: '.5rem',
+      display: 'flex',
+      alignItems: 'center',
+    },
+    starCount: {
+      marginLeft: '.5rem',
+      fontSize: '.8rem',
+    }
+  }
+export const ListItems = ({
+  list = [],
+  isDataLoading = false,
+  iconName
+}) => {
+
+  const { data, connector } = useGSkeletonData({
+    list,
+    loaderData: [{ id: 1 }, { id: 2 }, { id: 3 }],
+    isDataLoadingFn: () => isDataLoading,
+  })
+
+  return (
+    <GhostSkeleton connect={connector}>
+      {
+        data.map((datum) => <div key={datum.id} style={styles.card}>
+        <Icon name={iconName} />
+        <div style={styles.main}>
+          <Text style={styles.title}>{datum.description}</Text>
+          <Text style={styles.author}>{datum.author}</Text>
+          <div style={styles.stars}>
+            <Icon size={25} name="star" />
+            <Text style={styles.starCount}>{datum.stars}</Text>
+          </div>
+        </div>
+      </div>)
+      }
+    </GhostSkeleton>
+  )
+}
