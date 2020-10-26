@@ -46,6 +46,25 @@ body{
   background-repeat: repeat;
   animation: animatedBackground 5s linear infinite;
 }*/
+.list-wrapper{
+  height: 500px;
+  overflow: auto;
+}
+.list-item{
+  position:relative;
+}
+.list-item.loading::before{
+  content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    -webkit-animation: animatedBackground 1s linear infinite;
+    animation: animatedBackground 1s linear infinite;
+    background: linear-gradient(to right, rgba(53, 53, 53, 0) 46%, rgba(53, 53, 53, 0.35) 50%, rgba(53, 53, 53, 0) 54%) 50% 50%;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -54,11 +73,14 @@ body{
     transform: rotate(360deg);
   }
 }
-/*@keyframes animatedBackground {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 1000px 0;
-  }
-}*/
+@-webkit-keyframes animatedBackground {
+  0% {
+    transform: translate3d(-50%, 0, 0); }
+  100% {
+    transform: translate3d(50%, 0, 0); } }
+
+@keyframes animatedBackground {
+  0% {
+    transform: translate3d(-50%, 0, 0); }
+  100% {
+    transform: translate3d(50%, 0, 0); } }

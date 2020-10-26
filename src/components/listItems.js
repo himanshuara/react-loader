@@ -40,14 +40,14 @@ export const ListItems = ({
 
   const { data, connector } = useGSkeletonData({
     list,
-    loaderData: [{ id: 1 }, { id: 2 }, { id: 3 }],
+    loaderData: [{ id: 1 }],
     isDataLoadingFn: () => isDataLoading,
   })
-
+  //const removeList = !isDataLoading && !data.length;
   return (
     <GhostSkeleton connect={connector}>
-      {
-        data.map((datum) => <div key={datum.id} style={styles.card}>
+      {<div className="list-wrapper">
+        {data.map((datum) => <div className={isDataLoading?'list-item loading' : 'list-item'}  key={datum.id} style={styles.card}>
         <Icon name={iconName} />
         <div style={styles.main}>
           <Text style={styles.title}>{datum.description}</Text>
@@ -57,7 +57,8 @@ export const ListItems = ({
             <Text style={styles.starCount}>{datum.stars}</Text>
           </div>
         </div>
-      </div>)
+      </div>)}
+      </div>
       }
     </GhostSkeleton>
   )

@@ -28,7 +28,7 @@ export const GitHubRepoSearch = ({
                 id: repo.id,
               }));
               setGitRepoList(repos);
-              setIsDataLoading(true)
+              setIsDataLoading(false)
             })
       }
     return (
