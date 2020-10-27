@@ -1,13 +1,13 @@
 import React from 'react';
-import { GhostSkeleton, useGSkeletonData } from './ghost-skeleton/ghostSkeleton';
-import { Icon } from './icons';
-import {Text} from './text';
+import { GhostSkeleton, useGSkeletonData } from '../ghost-skeleton/ghostSkeleton';
+import { Icon } from '../micro-components/icons';
+import {Text} from '../micro-components/text';
 
 const styles = {
     card: {
       display: 'flex',
       flexDirection: 'row',
-      marginTop: '2.5rem',
+      marginTop: '0.0rem',
   
     },
     main: {
@@ -32,7 +32,7 @@ const styles = {
       fontSize: '.8rem',
     }
   }
-export const ListItems = ({
+export const ListUsers = ({
   list = [],
   isDataLoading = false,
   iconName
@@ -50,12 +50,8 @@ export const ListItems = ({
         {data.map((datum) => <div className={isDataLoading?'list-item loading' : 'list-item'}  key={datum.id} style={styles.card}>
         <Icon name={iconName} />
         <div style={styles.main}>
-          <Text style={styles.title}>{datum.description}</Text>
-          <Text style={styles.author}>{datum.author}</Text>
-          <div style={styles.stars}>
-            <Icon size={25} name="star" />
-            <Text style={styles.starCount}>{datum.stars}</Text>
-          </div>
+          <Text style={styles.title}>{datum.avatar_url}</Text>
+          <Text style={styles.author}>{datum.followers_url}</Text>
         </div>
       </div>)}
       </div>

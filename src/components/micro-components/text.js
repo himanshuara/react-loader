@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGSkeletonLoading } from './ghost-skeleton/ghostSkeleton';
+import { useGSkeletonLoading } from '../ghost-skeleton/ghostSkeleton';
 
 const skeltonStyles = {
   backgroundColor: '#666666',

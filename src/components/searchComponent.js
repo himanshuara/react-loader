@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Icon } from './icons';
-import {ListItems} from './listItems';
+import { Icon } from './micro-components/icons';
+//import {ListItems} from './listItems';
 
 const styles = {
   box: {
@@ -31,9 +31,8 @@ const styles = {
 
 export const SearchComponent = ({
   onSubmit,
-  isDataLoading,
-  dataList,
-  iconName
+  placeholder,
+  children
 }) => {
 
   const [inputValue, setInputValue] = useState('');
@@ -42,16 +41,15 @@ export const SearchComponent = ({
     e.preventDefault();
     onSubmit(inputValue)
   };
-
   return (
     <div>
     <form style={styles.box} onSubmit={onSubmitHandler}>
-      <input style={styles.input} type="text" value={inputValue} placeholder="Search Repos" onChange={handleChange} />
+      <input style={styles.input} type="text" value={inputValue} placeholder={placeholder} onChange={handleChange} />
       <button style={styles.button}>
         <Icon size={30} name="search" />
       </button>
     </form>
-    <ListItems list={dataList} isDataLoading={isDataLoading} iconName={iconName}/>
+    {children}
     </div>
   );
 }

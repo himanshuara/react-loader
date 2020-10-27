@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import {Icon} from './icons';
-import {Text} from './text';
-import {SearchComponent} from './searchComponent';
+import {Icon} from '../micro-components/icons';
+import {Text} from '../micro-components/text';
+import {SearchComponent} from '../searchComponent';
+import {ListItems} from './listItems';
 
 const styles={
     "wrapperStyles":{
@@ -17,6 +18,7 @@ export const GitHubRepoSearch = ({
     const [isDataLoading, setIsDataLoading] = useState(false);
 
     const onSubmit = (value) => {
+        if(value && value.trim()){
         setIsDataLoading(true);
         fetch(`https://api.github.com/search/repositories?q=${value}`)
         .then(response => response.json())
@@ -30,6 +32,11 @@ export const GitHubRepoSearch = ({
               setGitRepoList(repos);
               setIsDataLoading(false)
             })
+          }
+          else{
+            setGitRepoList([]);
+            setIsDataLoading(false)
+          }
       }
     return (
         <div style={{...styles.wrapperStyles}}>
@@ -37,7 +44,9 @@ export const GitHubRepoSearch = ({
         <Icon style={{ marginRight: '1rem' }} name={iconName} />
         <Text style={{ fontWeight: '700' }}>Search Git Repo</Text>
         </header>
-       <SearchComponent onSubmit={onSubmit} isDataLoading={isDataLoading} dataList={gitRepoList} iconName={iconName}/>
+       <SearchComponent onSubmit={onSubmit} isDataLoading={isDataLoading} dataList={gitRepoList} iconName={iconName} placeholder="Search Repo">
+       <ListItems list={gitRepoList} isDataLoading={isDataLoading} iconName={iconName}/>
+       </SearchComponent>
       </div>
     )
   }
